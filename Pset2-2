@@ -1,0 +1,78 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, string argv[])
+{
+    //Testing validity of command-line input
+    if (argc != 2)
+    {
+        printf("Usage: ./vigenere k (where k is an alphabetic string)\n");
+        return (1);
+    }
+
+    string k = argv[1];
+
+    for (int i = 0, n = strlen(argv[1]); i < n; i++)
+    {
+        if (isalpha(k[i]) == false)
+        {
+            printf("Usage: ./vicsgenere k (where k is an alphabetic string)\n");
+            return (1);
+        }
+    }
+
+    //Requesting plaintext from user
+    string p = get_string("plaintext: ");
+
+    //Creating ciphertext
+    printf("ciphertext: ");
+
+    int j, z, m;
+    for (j = 0, z = -1, m = strlen(p); j < m; j++)
+    {
+        int k1 = strlen(argv[1]);
+
+        if (isalpha(p[j]))
+        {
+            z++;
+
+            if (isupper(p[j]) && isupper(k[z % k1]))
+            {
+                int uu = ((((int) p[j]) - 65) + (((int) k[z % k1])) - 65) % 26;
+                int ciuu = ((int) 'A') + uu;
+                printf("%c", ciuu);
+            }
+
+            else if (isupper(p[j]) && islower(k[z % k1]))
+            {
+                int ul = ((((int) p[j]) - 65) + (((int) k[z % k1])) - 97) % 26;
+                int ciul = ((int) 'A') + ul;
+                printf("%c", ciul);
+            }
+
+            else if (islower(p[j]) && islower(k[z % k1]))
+            {
+                int ll = ((((int) p[j]) - 97) + (((int) k[z % k1])) - 97) % 26;
+                int cill = ((int) 'a') + ll;
+                printf("%c", cill);
+            }
+
+            else if (islower(p[j]) && isupper(k[z % k1]))
+            {
+                int lu = ((((int) p[j]) - 97) + (((int) k[z % k1])) - 65) % 26;
+                int cilu = ((int) 'a') + lu;
+                printf("%c", cilu);
+            }
+        }
+        else
+        {
+            printf("%c", p[j]);
+        }
+    }
+
+    printf("\n");
+    return (0);
+}
